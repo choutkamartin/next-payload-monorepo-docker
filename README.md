@@ -102,7 +102,7 @@ Let's add component named `RenderBlocks` to our Next.js application. This compon
 
 Add this script to `package.json` inside Payload folder:
 ```json
-"copy:types": "copyfiles payload-types.ts ../web"
+"copy:types": "copyfiles src/payload-types.ts ./../web -f"
 ```
 
 And change the `generate:types` script to 
