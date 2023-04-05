@@ -91,3 +91,21 @@ Then to the root `package.json` add these scripts:
 From root folder run `yarn dev`. You should be able to access Payload at `localhost:3000` and Next.js at `localhost:5000`.
 
 You can also build Payload and Next.js at the same time. Run `yarn build` and both packages will build and launch too. 
+
+Let's create simple `page` collection. Change the `Examples.ts` collection to `Pages.ts` and change the content to the one in this example.
+
+Add this collection to the `payload.config.ts`.
+
+To make importing a bit easier, we can add `"baseUrl": "."` to the `compilerOptions` inside `tsconfig.json` for your Next.js application. 
+
+Let's add component named `RenderBlocks` to our Next.js application. This component will correctly render specific blocks we get from Payload.
+
+Add this script to `package.json` inside Payload folder:
+```json
+"copy:types": "copyfiles payload-types.ts ../web"
+```
+
+And change the `generate:types` script to 
+```json
+"generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types && yarn copy:types"
+```
