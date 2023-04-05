@@ -1,0 +1,29 @@
+{
+  "name": "next-payload-monorepo-docker",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Martin Choutka <email@martinchoutka.cz>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail \"yarn dev:cms\" \"yarn dev:web\"",
+    "dev:web": "yarn workspace web dev",
+    "dev:cms": "yarn workspace cms dev",
+    "generate:types": "yarn workspace cms generate:types",
+    "prebuild": "yarn workspace cms generate:types ",
+    "build": "concurrently --kill-others-on-fail \"yarn build:cms && yarn start:cms\" \"yarn wait-on tcp:127.0.0.1:3000 && yarn build:web && yarn start:web\"",
+    "build:web": "yarn workspace web build",
+    "build:cms": "yarn workspace cms build",
+    "start": "concurrently --kill-others-on-fail \"yarn start:web\"  \"yarn start:cms\"",
+    "start:web": "yarn workspace web start",
+    "start:cms": "yarn workspace cms serve"
+  },
+  "workspaces": [
+    "cms",
+    "web"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "wait-on": "^7.0.1"
+  }
+}
