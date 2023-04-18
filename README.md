@@ -14,6 +14,7 @@ Enter MongoDB connection: mongodb://localhost/cms
 
 After Payload CMS installs all dependencies, we will create a Next.js application with the following command `npx create-next-app@latest --typescript`.
 
+## Create Next.js application
 ```
 What is your project named: web
 Would you like to use ESLint with this project: yes
@@ -22,7 +23,8 @@ Would you like to use experimental app directory with this project: no
 What import alias would you like to configure: none
 ```
 
-After Next.js finishes with the installation, we will init package.json at the root folder. Therefore run `yarn init`.
+## Initialize root package.json 
+After Next.js finishes the installation, we will init package.json at the root folder. Therefore run `yarn init`.
 ```
 Name: any you wish
 Version: any you wish
@@ -34,6 +36,7 @@ License: any you wish
 Private: true
 ```
 
+## Configure workspaces
 After a root `package.json` is created, we will add the following to the `package.json`.
 ```json
 "workspaces": [
@@ -92,6 +95,7 @@ From root folder run `yarn dev`. You should be able to access Payload at `localh
 
 You can also build Payload and Next.js at the same time. Run `yarn build` and both packages will build and launch too. 
 
+
 Let's create simple `page` collection. Change the `Examples.ts` collection to `Pages.ts` and change the content to the one in this example.
 
 Add this collection to the `payload.config.ts`.
@@ -109,3 +113,5 @@ And change the `generate:types` script to
 ```json
 "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types && yarn copy:types"
 ```
+
+## How to use this monorepo with a Docker?
