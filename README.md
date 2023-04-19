@@ -1,6 +1,13 @@
 # Payload CMS with Next.js in a monorepo using Yarn workspaces
 In this example, we will build a monorepo with Payload CMS and Next.js.
 
+This repository comes with example environment variables. Please, if possible, change them to your own values.
+
+You don't need to follow the guide below, mainly, if you already have an existing project you want to convert to monorepo.
+
+This repository also isn't deployable to Payload Cloud. Typical usage would be a deployment to your own VPS / server.
+
+# Let's start
 To get started, we will create two folders, namely `cms` that will contain Payload CMS and `web` that will contain Next.js.
 
 ## Create Payload CMS
@@ -95,15 +102,7 @@ From root folder run `yarn dev`. You should be able to access Payload at `localh
 
 You can also build Payload and Next.js at the same time. Run `yarn build` and both packages will build and launch too. 
 
-
-Let's create simple `page` collection. Change the `Examples.ts` collection to `Pages.ts` and change the content to the one in this example.
-
-Add this collection to the `payload.config.ts`.
-
-To make importing a bit easier, we can add `"baseUrl": "."` to the `compilerOptions` inside `tsconfig.json` for your Next.js application. 
-
-Let's add component named `RenderBlocks` to our Next.js application. This component will correctly render specific blocks we get from Payload.
-
+## Modify Payload CMS scripts
 Add this script to `package.json` inside Payload folder:
 ```json
 "copy:types": "copyfiles src/payload-types.ts ./../web -f"
@@ -113,6 +112,17 @@ And change the `generate:types` script to
 ```json
 "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types && yarn copy:types"
 ```
+
+## Optional changes (to match this example)
+### Payload CMS
+Let's create simple `page` collection. Change the `Examples.ts` collection to `Pages.ts` and change the content to the one in this example.
+
+Add this collection to the `payload.config.ts`.
+
+### Next.js
+To make importing a bit easier, we can add `"baseUrl": "."` to the `compilerOptions` inside `tsconfig.json` for your Next.js application. 
+
+Let's add component named `RenderBlocks` to our Next.js application. This component will correctly render specific blocks we get from Payload.
 
 ## How to use this monorepo with a Docker?
 TODO
